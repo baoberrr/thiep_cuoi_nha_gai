@@ -1,0 +1,303 @@
+{
+  "invitation": {
+    "id": "7f3bb668-718d-4e43-8d65-c07023dd23c5",
+    "title": "Thu Trang & Quang Huy",
+    "data": {
+      "date": "2026-10-24",
+      "time": "16:00",
+      "atTime": {
+        "en": "AT",
+        "vi": "VÀO LÚC",
+        "zh-TW": "時間"
+      },
+      "address": "Nhà Văn Hoá Vân Phúc, TTTM Vân Đình, Đường Lê Lợi, Xã Vân Đình, Thành phố Hà Nội",
+      "giftBox": {
+        "en": "Wedding Gift",
+        "vi": "Hộp Mừng Cưới",
+        "zh-TW": "禮金箱"
+      },
+      "showMap": true,
+      "mapTitle": {
+        "en": "MAP",
+        "vi": "BẢN ĐỒ",
+        "zh-TW": "地圖"
+      },
+      "showRsvp": true,
+      "countdown": {
+        "en": "Countdown",
+        "vi": "Cùng đếm ngược",
+        "zh-TW": "倒計時"
+      },
+      "guestbook": {
+        "en": "Guestbook",
+        "vi": "Sổ lưu bút",
+        "zh-TW": "賓客留言"
+      },
+      "brideFirst": true,
+      "brideLabel": {
+        "en": "Bride",
+        "vi": "Cô Dâu",
+        "zh-TW": "新娘"
+      },
+      "bridePhoto": "/images/co_dau.png",
+      "ceremonies": [
+        {
+          "id": "k1tqk1is",
+          "date": "2026-10-25",
+          "time": "13:00",
+          "header": {
+            "vi": "LỄ VU QUY ĐƯỢC CỬ HÀNH TẠI\nTƯ GIA"
+          }
+        }
+      ],
+      "groomLabel": {
+        "en": "Groom",
+        "vi": "Chú Rể",
+        "zh-TW": "新郎"
+      },
+      "groomPhoto": "/images/chu_re.png",
+      "mapAddress": "20.735212, 105.768928",
+      "mapUrl": "https://www.google.com/maps?q=20.735212,105.768928",
+      "latitude": 20.735212,
+      "longitude": 105.768928,
+      "partyStart": {
+        "en": "Reception",
+        "vi": "Khai tiệc",
+        "zh-TW": "開席"
+      },
+      "rsvpButton": {
+        "en": "CONFIRM",
+        "vi": "XÁC NHẬN",
+        "zh-TW": "確認出席"
+      },
+      "templateId": "double_dragon_red",
+      "banquetTime": "16:00",
+      "brideFather": "Trần Văn Thịnh",
+      "brideMother": "Đỗ Thị Thúy Vinh",
+      "groomFather": "Đào Mạnh Sơn",
+      "groomMother": "Dương Thị Hải Hà",
+      "noWishesYet": {
+        "en": "No wishes yet. Be the first!",
+        "vi": "Chưa có lời chúc nào. Hãy là người đầu tiên!",
+        "zh-TW": "還沒有祝福，成為第一位！"
+      },
+      "receptionAt": {
+        "en": "The reception will take place at:",
+        "vi": "Tiệc cưới sẽ diễn ra vào lúc:",
+        "zh-TW": "婚宴將於以下時間舉行："
+      },
+      "brideAddress": "208 Đường Lê Lợi, Xã Vân Đình, Thành phố Hà Nội",
+      "brideBankBin": "970407",
+      "ceremonyDate": "2026-10-25",
+      "ceremonyTime": "13:00",
+      "groomAddress": "294 Đường Lê Lợi, Xã Vân Đình, Thành phố Hà Nội",
+      "groomBankBin": "",
+      "musicEndTime": 236,
+      "musicTrackId": "romantic-002",
+      "showCeremony": true,
+      "showQRInline": false,
+      "showTimeline": false,
+      "thankYouNote": {
+        "en": "Your presence would be the greatest gift we could receive!",
+        "vi": "Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!",
+        "zh-TW": "您的蒞臨 là niềm vinh hạnh lớn nhất của chúng tôi!"
+      },
+      "weddingAlbum": {
+        "en": "Wedding Album",
+        "vi": "Album Ảnh Cưới",
+        "zh-TW": "婚禮相冊"
+      },
+      "addToCalendar": {
+        "en": "Add to Calendar",
+        "vi": "Thêm vào lịch",
+        "zh-TW": "添加到日曆"
+      },
+      "brideBankCode": "TCB",
+      "brideBankLogo": "https://api.vietqr.io/img/TCB.png",
+      "brideBankName": "TechcomBank",
+      "brideFullName": "Trần Thị Thu Trang",
+      "galleryImages": [
+        "/images/album_1.png",
+        "/images/album_2.png",
+        "/images/album_3.png",
+        "/images/album_4.png"
+      ],
+      "groomBankCode": "",
+      "groomBankLogo": "",
+      "groomBankName": "",
+      "groomFullName": "Đào Quang Huy",
+      "rsvpQuestions": [
+        {
+          "id": "0aeeb2ef",
+          "type": "yesno",
+          "label": "Tôi sẽ đi chung xe"
+        },
+        {
+          "id": "fa58ba61",
+          "type": "yesno",
+          "label": "Tôi có ăn chay"
+        }
+      ],
+      "showGuestbook": true,
+      "wishSavedText": {
+        "en": "Thank you! Your wish has been saved.",
+        "vi": "Cảm ơn bạn! Lời chúc đã được lưu.",
+        "zh-TW": "謝謝！您的祝福已儲存。"
+      },
+      "brideShortName": "Thu Trang",
+      "ceremonyHeader": "LỄ VU QUY ĐƯỢC CỬ HÀNH TẠI\nTƯ GIA",
+      "groomShortName": "Quang Huy",
+      "guestReception": {
+        "en": "Guest Reception",
+        "vi": "Đón khách",
+        "zh-TW": "賓客迎接"
+      },
+      "musicStartTime": 52,
+      "submitWishText": {
+        "en": "SEND WISH",
+        "vi": "GỬI LỜI CHÚC",
+        "zh-TW": "送出祝福"
+      },
+      "submittingText": {
+        "en": "SUBMITTING...",
+        "vi": "ĐANG GỬI...",
+        "zh-TW": "提交中..."
+      },
+      "timelineEvents": [
+        {
+          "id": "tl-don-khach",
+          "time": "09:00",
+          "label": {
+            "vi": "Đón khách",
+            "en": "Welcome"
+          }
+        },
+        {
+          "id": "tl-khai-tiec",
+          "time": "10:00",
+          "label": {
+            "vi": "Khai tiệc",
+            "en": "Reception"
+          }
+        },
+        {
+          "id": "tl-don-dau",
+          "time": "13:15",
+          "label": {
+            "vi": "Lễ đón dâu",
+            "en": "Bridal Procession"
+          }
+        },
+        {
+          "id": "tl-thanh-hon",
+          "time": "14:00",
+          "label": {
+            "vi": "Thành hôn",
+            "en": "Wedding Ceremony"
+          }
+        },
+        {
+          "id": "tl-ket-thuc",
+          "time": "15:00",
+          "label": {
+            "vi": "Kết thúc tiệc",
+            "en": "Farewell"
+          }
+        }
+      ],
+      "brideBirthOrder": {
+        "vi": "Thứ Nữ"
+      },
+      "giftBoxThankYou": {
+        "en": "Thank you for being part of our special day!",
+        "vi": "Cảm ơn bạn đã đồng hành cùng chúng mình trong ngày trọng đại!",
+        "zh-TW": "感謝您參與我們的重要日子！"
+      },
+      "groomBirthOrder": {
+        "vi": "Trưởng Nam"
+      },
+      "partyVenueTitle": {
+        "en": "Wedding Reception Venue",
+        "vi": "Tiệc cưới sẽ tổ chức tại",
+        "zh-TW": "婚宴地點"
+      },
+      "brideAccountName": "Trần Thị Thu Trang",
+      "brideParentTitle": {
+        "vi": "Ông bà"
+      },
+      "envelopeGreeting": {
+        "en": "Cordially Invites",
+        "vi": "Thân mời",
+        "zh-TW": "誠摯邀請"
+      },
+      "groomAccountName": "",
+      "groomParentTitle": {
+        "vi": "Ông bà"
+      },
+      "brideAccountNumber": "2999 0703 1998",
+      "envelopeOpenButton": {
+        "en": "Open",
+        "vi": "Mở thiệp",
+        "zh-TW": "開啟喜帖"
+      },
+      "groomAccountNumber": "",
+      "guestNamePlaceholder": {
+        "en": "Enter your name*",
+        "vi": "Nhập tên của bạn*",
+        "zh-TW": "請輸入您的姓名*"
+      },
+      "guestWishPlaceholder": {
+        "en": "Enter your wishes*",
+        "vi": "Nhập lời chúc của bạn*",
+        "zh-TW": "請輸入您的祝福*"
+      },
+      "envelopeInviteMessage": {
+        "en": "to celebrate with our family",
+        "vi": "đến dự buổi tiệc chung vui cùng gia đình",
+        "zh-TW": "蒞臨參加我們的家庭慶典"
+      },
+      "customAnnouncementText": "TRÂN TRỌNG BÁO TIN\nLỄ VU QUY CỦA CON CHÚNG TÔI",
+      "giftMethods": [
+        {
+          "id": "bride_vietqr",
+          "type": "vietqr",
+          "for": "bride",
+          "bankBin": "970407",
+          "bankCode": "TCB",
+          "bankName": "TechcomBank",
+          "bankLogo": "https://api.vietqr.io/img/TCB.png",
+          "accountNumber": "2999 0703 1998",
+          "accountName": "Trần Thị Thu Trang",
+          "qrImageUrl": "/images/qr_co_dau.png"
+        },
+        {
+          "id": "mother_vietqr",
+          "type": "vietqr",
+          "for": "custom",
+          "customLabel": {
+            "vi": "Mẹ Cô Dâu",
+            "en": "Mẹ Cô Dâu",
+            "zh-TW": "Mẹ Cô Dâu"
+          },
+          "bankBin": "970449",
+          "bankCode": "LPB",
+          "bankName": "LPBank",
+          "bankLogo": "https://api.vietqr.io/img/LPB.png",
+          "accountNumber": "000278229999",
+          "accountName": "Đỗ Thị Thúy Vinh",
+          "qrImageUrl": "/images/qr_me_co_dau.png"
+        }
+      ]
+    },
+    "slug": "quanghuy-thutrang-love",
+    "unique_visitors": 9982,
+    "is_paid": true,
+    "published_at": "2025-08-07T05:03:42.686Z",
+    "created_at": "2025-08-07T05:03:42.686Z",
+    "updated_at": "2026-07-06T10:00:07.782Z",
+    "branding": null
+  },
+  "viewLimitExceeded": false,
+  "trialExpired": false,
+  "viewCount": 9982
+}

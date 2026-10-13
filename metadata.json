@@ -1,0 +1,8 @@
+{
+  "name": "Thiệp Cưới Quang Huy & Thu Trang",
+  "description": "Thiệp cưới trực tuyến Song Long Đỏ cho cặp đôi Quang Huy & Thu Trang với tính năng gửi lời chúc, xác nhận tham dự (RSVP) và trang quản trị.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

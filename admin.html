@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý Xác nhận Tham dự — Huy &amp; Trang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f13; --surface: #1a1a22; --surface2: #222230;
+      --border: #2e2e3e; --primary: #c0392b; --primary-light: #e74c3c;
+      --gold: #d4a843; --text: #e8e8f0; --text-muted: #888899;
+      --green: #27ae60; --red: #e74c3c; --radius: 12px;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header {
+      background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0a0a 100%);
+      border-bottom: 1px solid var(--border); padding: 20px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-left h1 { font-size: 1.4rem; font-weight: 700; color: var(--gold); }
+    .header-left p { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+    .header-right { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: 0.82rem;
+      font-weight: 500; cursor: pointer; border: none;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-light); }
+    .stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px; padding: 24px 32px 0;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--gold); }
+    .stat-card .label { font-size: 0.72rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-card .value { font-size: 2rem; font-weight: 700; margin-top: 6px; line-height: 1; }
+    .stat-card .value.gold { color: var(--gold); }
+    .stat-card .value.green { color: var(--green); }
+    .stat-card .value.red { color: var(--red); }
+    .stat-card .value.blue { color: #5b8dee; }
+    .toolbar { display: flex; align-items: center; gap: 12px; padding: 20px 32px 12px; flex-wrap: wrap; }
+    .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 340px; }
+    .search-wrap input {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 12px 8px 36px; color: var(--text);
+      font-size: 0.85rem; font-family: inherit; outline: none; transition: border-color 0.2s;
+    }
+    .search-wrap input:focus { border-color: var(--gold); }
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .filter-select {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 12px; color: var(--text); font-size: 0.85rem; font-family: inherit; outline: none; cursor: pointer;
+    }
+    .filter-select:focus { border-color: var(--gold); }
+    .total-label { margin-left: auto; font-size: 0.82rem; color: var(--text-muted); }
+    .table-wrap { padding: 0 32px 40px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    thead tr { background: var(--surface2); border-bottom: 2px solid var(--border); }
+    th {
+      padding: 12px 14px; text-align: left; font-size: 0.72rem; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tbody tr:hover { background: var(--surface); }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+    .badge-yes { background: rgba(39,174,96,.15); color: var(--green); border: 1px solid rgba(39,174,96,.3); }
+    .badge-no  { background: rgba(231,76,60,.15);  color: var(--red);   border: 1px solid rgba(231,76,60,.3); }
+    .badge-yes-sm { background: rgba(39,174,96,.12); color: var(--green); border: 1px solid rgba(39,174,96,.25); font-size:.72rem; padding:2px 8px; border-radius:100px; }
+    .badge-no-sm  { background: rgba(136,136,153,.1); color: var(--text-muted); border: 1px solid var(--border); font-size:.72rem; padding:2px 8px; border-radius:100px; }
+    .phone-cell { font-family: 'Courier New', monospace; font-size: 0.88rem; color: var(--gold); letter-spacing: 0.04em; }
+    .name-cell { font-weight: 500; }
+    .time-cell { color: var(--text-muted); font-size: 0.78rem; white-space: nowrap; }
+    .msg-cell { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-muted); font-style: italic; }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+    .loading { text-align: center; padding: 60px; color: var(--text-muted); }
+    .spinner { display: inline-block; width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .7s linear infinite; margin-bottom: 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: var(--surface); padding: 24px; border-radius: var(--radius); width: 90%; max-width: 400px; border: 1px solid var(--border); }
+    .modal-content h3 { color: var(--gold); margin-bottom: 16px; font-size: 1.1rem; }
+    .modal-content label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-muted); }
+    .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 8px; margin-bottom: 12px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 6px; outline: none; }
+    .modal-content input:focus, .modal-content select:focus, .modal-content textarea:focus { border-color: var(--gold); }
+    .modal-content .actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <h1>&#128141; Quản lý Tham dự — Huy &amp; Trang</h1>
+    <p>Tự động làm mới mỗi 30 giây • <span id="last-updated">Đang tải...</span></p>
+  </div>
+  <div class="header-right">
+    <a href="/" class="btn btn-outline">← Xem thiệp</a>
+    <button class="btn btn-outline" onclick="openPhotoModal()" style="border-color:var(--gold);color:var(--gold)">📷 Thay ảnh Chú rể</button>
+    <button class="btn btn-outline" onclick="exportCSV()">&#8659; Xuất CSV</button>
+    <button class="btn btn-primary" onclick="openAddModal()">&#10133; Thêm</button>
+    <button class="btn btn-primary" onclick="loadData()">&#8635; Làm mới</button>
+  </div>
+</header>
+
+<div class="stats" id="stats">
+  <div class="stat-card"><div class="label">Tổng xác nhận</div><div class="value gold" id="s-total">—</div></div>
+  <div class="stat-card"><div class="label">Sẽ đến</div><div class="value green" id="s-yes">—</div></div>
+  <div class="stat-card"><div class="label">Không đến</div><div class="value red" id="s-no">—</div></div>
+  <div class="stat-card"><div class="label">Tổng số khách</div><div class="value blue" id="s-guests">—</div></div>
+  <div class="stat-card"><div class="label">Đi chung xe</div><div class="value" id="s-carpool" style="color:#a78bfa">—</div></div>
+  <div class="stat-card"><div class="label">Ăn chay</div><div class="value" id="s-veg" style="color:#34d399">—</div></div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="search" placeholder="Tìm theo tên, SĐT, lời nhắn..." oninput="renderTable()" />
+  </div>
+  <select class="filter-select" id="filter-attending" onchange="renderTable()">
+    <option value="">Tất cả</option>
+    <option value="yes">Sẽ đến ✓</option>
+    <option value="no">Không đến ✗</option>
+  </select>
+  <select class="filter-select" id="sort-col" onchange="renderTable()">
+    <option value="timestamp-desc">Mới nhất trước</option>
+    <option value="timestamp-asc">Cũ nhất trước</option>
+    <option value="name-asc">Tên A→Z</option>
+    <option value="attending-yes">Sẽ đến trước</option>
+  </select>
+  <span class="total-label" id="showing-label"></span>
+</div>
+
+<div class="table-wrap">
+  <div id="loading" class="loading"><div class="spinner"></div><p>Đang tải...</p></div>
+  <table id="rsvp-table" style="display:none">
+    <thead><tr>
+      <th>#</th><th>Họ tên</th><th>Số điện thoại</th><th>Tham dự</th>
+      <th>Số khách</th><th>Đi chung xe</th><th>Ăn chay</th><th>Mừng cưới</th><th>Lời nhắn</th><th>Thời gian</th><th>Hành động</th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div id="empty" class="empty-state" style="display:none">
+    <div class="icon">&#128205;</div><p>Chưa có xác nhận tham dự nào.</p>
+  </div>
+</div>
+
+<div id="addModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3 id="modalTitle">Thêm Khách Mời</h3>
+    <input type="hidden" id="addId" />
+    <label>Họ tên</label><input type="text" id="addName" />
+    <label>Số điện thoại</label><input type="text" id="addPhone" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+    <label>Tham dự</label>
+    <select id="addAttending"><option value="yes">Sẽ đến</option><option value="no">Không đến</option></select>
+    <label>Đi chung xe</label>
+    <select id="addCarpool"><option value="false">Không</option><option value="true">Có</option></select>
+    <label>Ăn chay</label>
+    <select id="addVeg"><option value="false">Không</option><option value="true">Có</option></select>
+    <label>Số khách</label><input type="number" id="addGuests" value="1" />
+    <label>Mừng cưới</label><input type="text" id="addGift" placeholder="VD: 500k, 1.000.000..." />
+    <label>Lời nhắn</label><textarea id="addMessage" rows="2"></textarea>
+    <div class="actions">
+      <button class="btn btn-outline" onclick="closeAddModal()">Hủy</button>
+      <button class="btn btn-primary" onclick="submitAddGuest()">Lưu</button>
+    </div>
+  </div>
+</div>
+<div id="msgModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Lời nhắn từ <span id="msgModalName"></span></h3>
+    <p id="msgModalText" style="line-height:1.5;margin-bottom:20px;white-space:pre-wrap;color:var(--text);font-size:0.9rem;"></p>
+    <div class="actions">
+      <button class="btn btn-outline" onclick="document.getElementById('msgModal').style.display='none'">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<div id="photoModal" class="modal-overlay">
+  <div class="modal-content" style="max-width:440px;">
+    <h3>📷 Thay Ảnh Đại Diện Chú Rể</h3>
+    <div style="text-align:center;margin:15px 0;">
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">Ảnh hiện tại:</p>
+      <img id="currentGroomImg" src="/images/chu_re.png" alt="Ảnh chú rể" style="width:130px;height:180px;object-fit:cover;border-radius:10px;border:2px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5);display:inline-block;" />
+    </div>
+    <label style="display:block;margin-bottom:6px;font-size:0.85rem;color:var(--text-muted);">Chọn ảnh mới từ thiết bị (image.png):</label>
+    <input type="file" id="photoFileInput" accept="image/*" onchange="handlePhotoSelect(event)" style="margin-bottom:12px;background:var(--bg);padding:8px;border:1px solid var(--border);border-radius:6px;width:100%;color:var(--text);" />
+    <div id="newPhotoPreviewWrap" style="display:none;text-align:center;margin:12px 0;">
+      <p style="font-size:0.8rem;color:var(--green);margin-bottom:8px;">✓ Xem trước ảnh mới được chọn:</p>
+      <img id="newPhotoPreview" src="" alt="Preview" style="width:130px;height:180px;object-fit:cover;border-radius:10px;border:2px solid var(--green);display:inline-block;" />
+    </div>
+    <div class="actions">
+      <button class="btn btn-outline" onclick="closePhotoModal()">Hủy</button>
+      <button class="btn btn-primary" id="savePhotoBtn" onclick="submitSavePhoto()" disabled>Lưu ảnh</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let allData = [];
+
+async function loadData() {
+  try {
+    const res = await fetch('/admin-api/rsvp');
+    if (res.status === 401) {
+      window.location.reload();
+      return;
+    }
+    const json = await res.json();
+    allData = json.rsvp || [];
+    updateStats();
+    renderTable();
+    document.getElementById('last-updated').textContent =
+      'Cập nhật lúc ' + new Date().toLocaleTimeString('vi-VN');
+  } catch(e) {
+    document.getElementById('loading').innerHTML = '<p style="color:#e74c3c">Lỗi: ' + e.message + '</p>';
+  }
+}
+
+function updateStats() {
+  const yes = allData.filter(r => r.attending === 'yes');
+  const no  = allData.filter(r => r.attending === 'no');
+  document.getElementById('s-total').textContent   = allData.length;
+  document.getElementById('s-yes').textContent     = yes.length;
+  document.getElementById('s-no').textContent      = no.length;
+  document.getElementById('s-guests').textContent  = yes.reduce((s,r)=>s+(r.numberOfGuests||1),0);
+  document.getElementById('s-carpool').textContent = allData.filter(r=>r.isCarpool).length;
+  document.getElementById('s-veg').textContent     = allData.filter(r=>r.isVegetarian).length;
+}
+
+function renderTable() {
+  const q     = document.getElementById('search').value.toLowerCase();
+  const fAtt  = document.getElementById('filter-attending').value;
+  const sort  = document.getElementById('sort-col').value;
+
+  let rows = allData.filter(r => {
+    const mQ = !q || (r.name||'').toLowerCase().includes(q) ||
+               (r.phone||'').includes(q) || (r.message||'').toLowerCase().includes(q);
+    const mA = !fAtt || r.attending === fAtt;
+    return mQ && mA;
+  });
+
+  if (sort === 'timestamp-desc') rows.sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
+  else if (sort === 'timestamp-asc') rows.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
+  else if (sort === 'name-asc') rows.sort((a,b)=>(a.name||'').localeCompare(b.name||'','vi'));
+  else if (sort === 'attending-yes') rows.sort((a,b)=>(a.attending==='yes'?0:1)-(b.attending==='yes'?0:1));
+
+  document.getElementById('showing-label').textContent =
+    rows.length === allData.length ? rows.length + ' bản ghi' : 'Hiển thị ' + rows.length + ' / ' + allData.length;
+
+  document.getElementById('loading').style.display = 'none';
+  const empty = document.getElementById('empty');
+  const table = document.getElementById('rsvp-table');
+
+  if (!rows.length) { table.style.display='none'; empty.style.display='block'; return; }
+  table.style.display='table'; empty.style.display='none';
+
+  document.getElementById('tbody').innerHTML = rows.map((r,i) => {
+    const att = r.attending === 'yes'
+      ? '<span class="badge badge-yes">✓ Sẽ đến</span>'
+      : '<span class="badge badge-no">✗ Không đến</span>';
+    const cp  = r.isCarpool    ? '<span class="badge-yes-sm">✓ Có</span>' : '<span class="badge-no-sm">Không</span>';
+    const veg = r.isVegetarian ? '<span class="badge-yes-sm">🌿 Có</span>' : '<span class="badge-no-sm">Không</span>';
+    const dt  = new Date(r.timestamp).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    const msg = r.message ? '<span style="cursor:pointer;text-decoration:underline dashed;" onclick="showMsgModal(\''+esc(r.name).replace(/'/g,"\\'")+'\', \''+esc(r.message).replace(/'/g,"\\'").replace(/\n/g,"\\n")+'\')">'+esc(r.message)+'</span>' : '<span style="color:#555">—</span>';
+    const gift = r.gift ? '<span style="color:var(--gold);font-weight:600">'+esc(r.gift)+'</span>' : '<span style="color:#555">—</span>';
+    const editGiftBtn = '<button onclick="editGift(\'' + r.id + '\', \'' + esc(r.gift||'') + '\')" style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;margin-left:5px;font-size:0.8rem;" title="Cập nhật mừng cưới">✎</button>';
+    const editBtn = '<button onclick="openEditModal(\'' + r.id + '\')" style="background:transparent;border:none;color:var(--gold);cursor:pointer;font-size:1.1rem;margin-right:12px;" title="Sửa thông tin">✎</button>';
+    const delBtn = '<button onclick="deleteRsvp(\'' + r.id + '\')" style="background:transparent;border:none;color:var(--red);cursor:pointer;font-size:1.1rem;" title="Xóa">🗑️</button>';
+    return '<tr><td style="color:var(--text-muted);font-size:.78rem">'+(i+1)+'</td>'
+      +'<td class="name-cell">'+esc(r.name||'—')+'</td>'
+      +'<td class="phone-cell">'+esc(r.phone||'—')+'</td>'
+      +'<td>'+att+'</td>'
+      +'<td style="text-align:center;font-weight:600">'+(r.attending==='yes'?(r.numberOfGuests||1):'—')+'</td>'
+      +'<td>'+cp+'</td><td>'+veg+'</td>'
+      +'<td>'+gift+editGiftBtn+'</td>'
+      +'<td class="msg-cell">'+msg+'</td>'
+      +'<td class="time-cell">'+dt+'</td>'
+      +'<td style="text-align:center;white-space:nowrap;">'+editBtn+delBtn+'</td></tr>';
+  }).join('');
+}
+
+async function deleteRsvp(id) {
+  if (!confirm('Bạn có chắc chắn muốn xóa xác nhận này không?')) return;
+  try {
+    const res = await fetch('/admin-api/rsvp/delete', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id: id})
+    });
+    if (res.ok) {
+      loadData();
+    } else {
+      alert('Lỗi khi xóa!');
+    }
+  } catch(e) {
+    alert('Lỗi kết nối: ' + e.message);
+  }
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function exportCSV() {
+  const h = ['STT','Họ tên','Số điện thoại','Tham dự','Số khách','Đi chung xe','Ăn chay','Mừng cưới','Lời nhắn','Thời gian'];
+  const rows = allData.map((r,i)=>[
+    i+1, r.name||'', r.phone||'',
+    r.attending==='yes'?'Sẽ đến':'Không đến',
+    r.attending==='yes'?(r.numberOfGuests||1):'',
+    r.isCarpool?'Có':'Không', r.isVegetarian?'Có':'Không',
+    r.gift||'',
+    r.message||'', new Date(r.timestamp).toLocaleString('vi-VN')
+  ]);
+  const csv = '\uFEFF'+[h,...rows].map(row=>row.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
+  a.download = 'rsvp-huy-trang-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+function showMsgModal(name, msg) {
+  document.getElementById('msgModalName').textContent = name;
+  document.getElementById('msgModalText').textContent = msg;
+  document.getElementById('msgModal').style.display = 'flex';
+}
+
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = 'Thêm Khách Mời';
+  document.getElementById('addId').value = '';
+  document.getElementById('addName').value = '';
+  document.getElementById('addPhone').value = '';
+  document.getElementById('addAttending').value = 'yes';
+  document.getElementById('addCarpool').value = 'false';
+  document.getElementById('addVeg').value = 'false';
+  document.getElementById('addGuests').value = '1';
+  document.getElementById('addGift').value = '';
+  document.getElementById('addMessage').value = '';
+  document.getElementById('addModal').style.display = 'flex';
+}
+
+function openEditModal(id) {
+  const r = allData.find(x => x.id === id);
+  if (!r) return;
+  document.getElementById('modalTitle').textContent = 'Chỉnh sửa Khách Mời';
+  document.getElementById('addId').value = r.id || '';
+  document.getElementById('addName').value = r.name || '';
+  document.getElementById('addPhone').value = r.phone || '';
+  document.getElementById('addAttending').value = r.attending || 'yes';
+  document.getElementById('addCarpool').value = r.isCarpool ? 'true' : 'false';
+  document.getElementById('addVeg').value = r.isVegetarian ? 'true' : 'false';
+  document.getElementById('addGuests').value = r.numberOfGuests || '1';
+  document.getElementById('addGift').value = r.gift || '';
+  document.getElementById('addMessage').value = r.message || '';
+  document.getElementById('addModal').style.display = 'flex';
+}
+
+function closeAddModal() {
+  document.getElementById('addModal').style.display = 'none';
+}
+
+async function submitAddGuest() {
+  const phoneVal = document.getElementById('addPhone').value;
+  if (phoneVal && phoneVal.length !== 10) {
+    alert('Số điện thoại bắt buộc phải là 10 chữ số!');
+    return;
+  }
+  const data = {
+    id: document.getElementById('addId').value || null,
+    name: document.getElementById('addName').value,
+    phone: document.getElementById('addPhone').value,
+    attending: document.getElementById('addAttending').value,
+    numberOfGuests: parseInt(document.getElementById('addGuests').value) || 1,
+    isCarpool: document.getElementById('addCarpool').value === 'true',
+    isVegetarian: document.getElementById('addVeg').value === 'true',
+    gift: document.getElementById('addGift').value,
+    message: document.getElementById('addMessage').value
+  };
+  try {
+    const res = await fetch('/admin-api/rsvp/update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    if(res.ok) { closeAddModal(); loadData(); } else alert('Lỗi khi lưu!');
+  } catch(e) { alert('Lỗi kết nối!'); }
+}
+
+async function editGift(id, current) {
+  const val = prompt('Nhập số tiền mừng cưới:', current);
+  if (val === null) return;
+  try {
+    const res = await fetch('/admin-api/rsvp/update', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id: id, gift: val})
+    });
+    if(res.ok) loadData(); else alert('Lỗi khi cập nhật!');
+  } catch(e) { alert('Lỗi kết nối!'); }
+}
+
+let selectedPhotoBase64 = null;
+
+function openPhotoModal() {
+  document.getElementById('currentGroomImg').src = '/images/chu_re.png?t=' + Date.now();
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('newPhotoPreviewWrap').style.display = 'none';
+  document.getElementById('savePhotoBtn').disabled = true;
+  selectedPhotoBase64 = null;
+  document.getElementById('photoModal').style.display = 'flex';
+}
+
+function closePhotoModal() {
+  document.getElementById('photoModal').style.display = 'none';
+}
+
+function handlePhotoSelect(e) {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    selectedPhotoBase64 = evt.target.result;
+    document.getElementById('newPhotoPreview').src = selectedPhotoBase64;
+    document.getElementById('newPhotoPreviewWrap').style.display = 'block';
+    document.getElementById('savePhotoBtn').disabled = false;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitSavePhoto() {
+  if (!selectedPhotoBase64) return;
+  const btn = document.getElementById('savePhotoBtn');
+  btn.disabled = true;
+  btn.innerText = 'Đang lưu...';
+  try {
+    const res = await fetch('/admin-api/upload-photo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ imageBase64: selectedPhotoBase64, target: 'groom' })
+    });
+    const json = await res.json();
+    if (json.success) {
+      alert('✓ Đã cập nhật ảnh Chú rể thành công!');
+      document.getElementById('currentGroomImg').src = json.url;
+      closePhotoModal();
+    } else {
+      alert('Lỗi: ' + (json.error || 'Không thể lưu ảnh'));
+    }
+  } catch (err) {
+    alert('Lỗi kết nối khi tải ảnh!');
+  } finally {
+    btn.disabled = false;
+    btn.innerText = 'Lưu ảnh';
+  }
+}
+
+loadData();
+setInterval(loadData, 30000);
+</script>
+</body>
+</html>
