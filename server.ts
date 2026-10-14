@@ -165,9 +165,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Pragma', 'no-cache');
     res.setHeader('Expires', '0');
   } else if (pathLower.includes('_next/static/') || pathLower.includes('/fonts/')) {
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
   } else {
-    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   }
 
   next();
@@ -214,6 +216,8 @@ const handleInvitationHtml = (req: Request, res: Response) => {
         }
       } catch {}
     }
+    html = html.replace(/0979690880/g, '0966324566');
+    html = html.replace(/6UtQqf8Rruich7ix7/g, 'cdWx62o2ruUL9uJy9');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.send(html);
   }

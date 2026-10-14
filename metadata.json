@@ -1,6 +1,6 @@
 {
-  "name": "Thiệp Cưới Quang Huy & Thu Trang",
-  "description": "Thiệp cưới trực tuyến Song Long Đỏ cho cặp đôi Quang Huy & Thu Trang với tính năng gửi lời chúc, xác nhận tham dự (RSVP) và trang quản trị.",
+  "name": "Remix thiep_cuoi_nha_gai",
+  "description": "Imported from GitHub",
   "permissions": [],
   "capabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
