@@ -130,8 +130,8 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Expires', '0')
         else:
             # Tài nguyên tĩnh
-            if '_next/static/' in path_lower or '/fonts/' in path_lower:
-                # Tài nguyên đã có hash tên file, cache vĩnh viễn (1 năm)
+            if '_next/static/' in path_lower or '/fonts/' in path_lower or '/images/gallery/' in path_lower or '/vendor/' in path_lower:
+                # Tài nguyên đã có hash tên file hoặc ảnh gallery WebP nén sẵn (cache vĩnh viễn 1 năm)
                 self.send_header('Cache-Control', 'public, max-age=31536000, immutable')
             else:
                 # Các tài nguyên tĩnh khác như ảnh, nhạc, icon (cache 1 ngày)
